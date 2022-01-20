@@ -1,42 +1,50 @@
-package br.org.generationalune.blogpessoal.model; //esse ao invés de new -> call é new -> interface
+package br.org.generationalune.blogpessoal.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
-@Entity
-@Table(name = "tb_postagem")
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@Entity
+@Table(name = "tb_postagens")
 public class Postagem 
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@NotBlank (message = "O atributo título é obrigatório e não pode utilizar espaços em branco!")
-	@Size(min = 5, max = 100, message = "O atributo texto deve conter no mínimo 10 e no máximo 500 caracteres)")
+	@Size(min = 5, max = 100, message = "O atributo título deve conter no mínimo 05 e no máximo 100 caracteres")
 	private String titulo;
 	
-	@Size(min = 10, max = 500)
+	@NotNull(message = "O atributotexto é obrigatório!")
+	@Size(min = 10, max = 1000, message = "O atributo texto deve conter no mínimo 10 e no máximo 500 carateres")
 	private String texto;
 	
 	@UpdateTimestamp
-	private LocalDateTime data;
+	private LocalDate data;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Tema tema;
 
-	public long getId() 
+	public Long getId() 
 	{
 		return id;
 	}
 
-	public void setId(long id) 
+	public void setId(Long id) 
 	{
 		this.id = id;
 	}
@@ -61,14 +69,23 @@ public class Postagem
 		this.texto = texto;
 	}
 
-	public LocalDateTime getData() 
+	public LocalDate getData() 
 	{
 		return data;
 	}
 
-	public void setData(LocalDateTime data) 
+	public void setData(LocalDate data) 
 	{
 		this.data = data;
 	}
 	
+	public Tema getTema()
+	{
+		return this.tema;
+	}
+	
+	public void setTema(Tema tema)
+	{
+		this.tema = tema;
+	}
 }
