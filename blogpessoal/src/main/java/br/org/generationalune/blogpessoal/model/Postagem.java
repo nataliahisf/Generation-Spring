@@ -1,6 +1,7 @@
-package br.org.generationalune.blogpessoal.model;
+package br.org.generationalune.blogpessoal.model; //esse ao invés de new -> call é new -> interface
 
 import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +13,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "postagem")
+@Table(name = "tb_postagem")
 
 public class Postagem 
 {
@@ -20,8 +21,8 @@ public class Postagem
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotBlank
-	@Size(min = 5, max = 100)
+	@NotBlank (message = "O atributo título é obrigatório e não pode utilizar espaços em branco!")
+	@Size(min = 5, max = 100, message = "O atributo texto deve conter no mínimo 10 e no máximo 500 caracteres)")
 	private String titulo;
 	
 	@Size(min = 10, max = 500)
@@ -30,35 +31,43 @@ public class Postagem
 	@UpdateTimestamp
 	private LocalDateTime data;
 
-	public long getId() {
+	public long getId() 
+	{
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(long id) 
+	{
 		this.id = id;
 	}
 
-	public String getTitulo() {
+	public String getTitulo() 
+	{
 		return titulo;
 	}
 
-	public void setTitulo(String titulo) {
+	public void setTitulo(String titulo) 
+	{
 		this.titulo = titulo;
 	}
 
-	public String getTexto() {
+	public String getTexto() 
+	{
 		return texto;
 	}
 
-	public void setTexto(String texto) {
+	public void setTexto(String texto) 
+	{
 		this.texto = texto;
 	}
 
-	public LocalDateTime getData() {
+	public LocalDateTime getData() 
+	{
 		return data;
 	}
 
-	public void setData(LocalDateTime data) {
+	public void setData(LocalDateTime data) 
+	{
 		this.data = data;
 	}
 	
