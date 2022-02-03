@@ -39,7 +39,7 @@ public class BasicSecuryConfig extends WebSecurityConfigurerAdapter {
 		protected void configure(HttpSecurity http) throws Exception {
 		 
 		 http.authorizeRequests()
-			.antMatchers("/usuarios/logar").permitAll()
+			.antMatchers("/usuarios/logar").permitAll() //"permitAll" permite que seja verificado sem senha. Usado apenas para teste
 			.antMatchers("/usuarios/cadastrar").permitAll()
 			.antMatchers(HttpMethod.OPTIONS).permitAll()
 			.anyRequest().authenticated()

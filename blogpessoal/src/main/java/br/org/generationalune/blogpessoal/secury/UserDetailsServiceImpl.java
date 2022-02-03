@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import br.org.generation.blogpessoal.model.Usuario;
-import br.org.generation.blogpessoal.repository.UsuarioRepository;
+import br.org.generationalune.blogpessoal.model.Usuario;
+import br.org.generationalune.blogpessoal.repository.UsuarioRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -21,6 +21,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		
 		Optional<Usuario> usuario = userRepository.findByUsuario(userName);
+		
+		usuario.orElseThrow(() -> new UsernameNotFoundException(userName + "not found."));
 		
 		return usuario.map(UserDetailsImpl::new).get();
 	}

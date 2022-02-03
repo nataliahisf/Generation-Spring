@@ -12,10 +12,9 @@ import org.springframework.stereotype.Repository;
 import br.org.generationalune.blogpessoal.model.Postagem;
 
 @Repository
-public interface PostagemRepository extends JpaRepository<Postagem, Long>
-{
-	public List <Postagem> findAllByTituloContainingIgnoreCase(String titulo);
+public interface PostagemRepository extends JpaRepository<Postagem, Long> {
+	public List <Postagem> findAllByTituloContainingIgnoreCase(String Titulo);
 	
-	/* Equivalente a: select * from tb_postagens where titulo like "%titulo%"; 
-	 o "IgnoreCase" é apenas para que ele ignore maiúsculas e minúsculas*/
+	//* Equivalente a: select * from tb_postagens where titulo like "%titulo%"; 
+	 //o "IgnoreCase" é apenas para que ele ignore maiúsculas e minúsculas*/
 }
